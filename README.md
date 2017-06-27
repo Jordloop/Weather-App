@@ -26,6 +26,7 @@ Run command to test myTask:
 return:
 <pre>> hello gulp</pre>
 
+Remove myTask from gulpfile.js
 # Browserify setup
 
 <pre>npm install browserify --save-dev</pre>
@@ -83,7 +84,23 @@ gulp.task('concatInterface', function() {
 
 <pre>> gulp jsBrowserify</pre>
 
-# gulp-uglify (minification) Setup
+# minification Setup
+
+<pre>> npm install gulp-uglify --save-dev</pre>
+
+### Include gulp-uglify require in gulpfile.js
+
+<pre>var uglify = require('gulp-uglify');</pre>
+
+### Include minifyScripts task in gulpfile.js
+
+jsBrowserify is a dependency of minifyScripts. Place below jsBrowserify task.
+
+<pre>gulp.task("minifyScripts", ["jsBrowserify"], function(){
+  return gulp.src("./build/js/app.js")
+    .pipe(uglify())
+    .pipe(gulp.dest("./build/js"));
+});</pre>
 
 
 
