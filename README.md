@@ -234,10 +234,6 @@ Moment.js can easily work with dates and times in various formats in our apps.
 
 <pre>> npm install bower-files --save-dev</pre>
 
-### Require Package
-
-<pre>var lib = require('bower-files')();</pre>
-
 ### Add bowerJS task
 
 <pre>gulp.task('bowerJS', function () {
@@ -247,19 +243,48 @@ Moment.js can easily work with dates and times in various formats in our apps.
     .pipe(gulp.dest('./build/js'));
 });</pre>
 
-This task pulls  together all JS files, and outputs one concatenated, minified file to link in our index.html
-
-### These should each be a property of a <script> element
-<pre>src="build/js/vendor.min.js"
-type="text/javascript" src="build/js/app.js"</pre>
+This task pulls together all JS files, and outputs one concatenated, minified file to link in our index.html
 
 ### Each time a new JS front-end dependence, the command will need to be used:
 
 <pre>gulp bowerJs</pre>
 
+#### Add bowerCSS task
+
+<pre>gulp.task('bowerCSS', function () {
+  return gulp.src(lib.ext('css').files)
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./build/css'));
+});</pre>
+
+This task does the same thing as the bowerJS task, but gathers CSS files, not JS files
+
+### These should each be a property of a <script> element
+<pre>//link element
+rel="stylesheet" href="build/css/vendor.css"
+//script elements
+src="build/js/vendor.min.js"
+type="text/javascript" src="build/js/app.js"</pre>
+
+### Require Package
+
+<pre>var lib = require('bower-files')({
+  "overrides":{
+    "bootstrap" : {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+});</pre>
+
+### Combine these two bower tasks into one task in gulpfile.js
+
+<pre>gulp.task('bower', ['bowerJS', 'bowerCSS']);</pre>
 
 
-<pre></pre>
-<pre></pre>
+
 <pre></pre>
 <pre></pre>

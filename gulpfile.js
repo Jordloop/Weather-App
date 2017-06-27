@@ -7,7 +7,17 @@ var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var del = require('del');
 var jshint = require('gulp-jshint');
-var lib = require('bower-files')();
+var lib = require('bower-files')({
+  "overrides":{
+    "bootstrap" : {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
+});
 // ----ENVIRONMENTAL VARIABLE----
 var buildProduction = utilities.env.production;
 
@@ -38,6 +48,7 @@ gulp.task("build", ['clean'], function(){
   } else {
     gulp.start('jsBrowserify');
   }
+  gulp.start('bower');
 });
 
 //----LINTER-----
@@ -48,11 +59,20 @@ gulp.task('jshint', function(){
 });
 
 //----BOWER-FILES----
-//This creates a document called "vendow.min.js" which contains each
-//a link to each JS front-end dependency ie. bootstrap.min.css 
+//This creates a document called "vendor.min.js" which contains each
+//a link to each JS front-end dependency ie. bootstrap.min.css
 gulp.task('bowerJS', function () {
   return gulp.src(lib.ext('js').files)
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./build/js'));
 });
+//This does as the above task but collects CSS dependencies
+//in a document called "vendor.css"
+gulp.task('bowerCSS', function () {
+  return gulp.src(lib.ext('css').files)
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./build/css'));
+});
+//This executed bowerJS taska and bowerCSS task in parallel
+gulp.task('bower', ['bowerJS', 'bowerCSS']);
