@@ -102,6 +102,35 @@ jsBrowserify is a dependency of minifyScripts. Place below jsBrowserify task.
     .pipe(gulp.dest("./build/js"));
 });</pre>
 
+## Build task
+
+Place this snippet at the end of the file.
+
+<pre>gulp.task("build", function(){
+  if (buildProduction) {
+    gulp.start('minifyScripts');
+    } else {
+      gulp.start('jsBrowserify');
+    }
+  });</pre>
+
+# Environmental  Variables
+
+<pre>> npm install gulp-util --save-dev</pre>
+
+Require gulp-util in gulpfile.js
+<pre>var utilities = require('gulp-util');</pre>
+
+Create an environmental variable
+<pre>var buildProduction = utilities.env.production;</pre>
+
+Using the following command will run a production build
+<pre>> gulp build --production</pre>
+
+The following command will make a development build
+<pre>> gulp build</pre>
+
+
 
 
 
@@ -120,8 +149,6 @@ jsBrowserify is a dependency of minifyScripts. Place below jsBrowserify task.
 <br>----------------------------------
 <pre>bower init</pre>
 <pre>npm install bower -g</pre>
-<pre>npm install gulp --save-dev</pre>
-<pre>npm install gulp-uglify --save-dev</pre>
 <pre>npm install gulp-util --save-dev</pre>
 <pre>npm install del --save-dev</pre>
 <pre>npm install jshint --save-dev</pre>
