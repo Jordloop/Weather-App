@@ -1,0 +1,17 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "<pre>npm init</pre>\r <pre>bower init</pre>\r <pre>npm install gulp --save-dev</pre>\r <pre>npm install gulp -g\r ELSE\r sudo npm install gulp -g</pre>\r <pre>npm install bower -g</pre>\r <pre>npm install gulp --save-dev</pre>\r <pre>npm install browserify --save-dev</pre>\r <pre>npm install vinyl-source-stream --save-dev</pre>\r <pre>npm install gulp-concat --save-dev</pre>\r <pre>npm install gulp-uglify --save-dev</pre>\r <pre>npm install gulp-util --save-dev</pre>\r <pre>npm install del --save-dev</pre>\r <pre>npm install jshint --save-dev</pre>\r <pre>npm install gulp-jshint --save-dev</pre>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
