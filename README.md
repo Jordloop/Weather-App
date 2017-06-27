@@ -106,13 +106,15 @@ jsBrowserify is a dependency of minifyScripts. Place below jsBrowserify task.
 
 Place this snippet at the end of the file.
 
-<pre>gulp.task("build", function(){
+<pre>gulp.task("build", ['clean'], function(){
   if (buildProduction) {
     gulp.start('minifyScripts');
-    } else {
-      gulp.start('jsBrowserify');
-    }
-  });</pre>
+  } else {
+    gulp.start('jsBrowserify');
+  }
+});</pre>
+
+The 'build' task contains 'clean' task as a dependency. Therefor, this will not run until we add the 'clean' task
 
 # Environmental  Variables
 
@@ -124,18 +126,33 @@ Require gulp-util in gulpfile.js
 Create an environmental variable
 <pre>var buildProduction = utilities.env.production;</pre>
 
+
+# Clean Tasks
+
+### Install del package
+
+<pre>> npm install del --save-dev</pre>
+
+### Require del
+
+<pre>var del = require('del');</pre>
+
+### Add 'clean' task to gulpfile.js
+
+<pre>gulp.task("clean", function(){
+  return del(['build', 'tmp']);
+});
+</pre>
+
+#### Now that gulpfile.js has a 'clean' task, we are able to test that...
+* the 'build' task is functioning properly
+* the environmental variable is functioning properly
+
 Using the following command will run a production build
 <pre>> gulp build --production</pre>
 
 The following command will make a development build
 <pre>> gulp build</pre>
-
-
-
-
-
-
-
 
 
 

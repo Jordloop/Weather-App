@@ -1,15 +1,1 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var apiKey = "YOUR-API-KEY-GOES-HERE";
-
-$(document).ready(function() {
-  $('#weather-location').click(function() {
-    var city = $('#location').val();
-    $('#location').val("");
-    $('.showWeather').text("The city you have chosen is " + city + ".");
-    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey, function(response) {
-      console.log(response);
-    });
-  });
-});
-
-},{}]},{},[1]);
+!function e(r,t,o){function n(a,u){if(!t[a]){if(!r[a]){var c="function"==typeof require&&require;if(!u&&c)return c(a,!0);if(i)return i(a,!0);var f=new Error("Cannot find module '"+a+"'");throw f.code="MODULE_NOT_FOUND",f}var l=t[a]={exports:{}};r[a][0].call(l.exports,function(e){var t=r[a][1][e];return n(t||e)},l,l.exports,e,r,t,o)}return t[a].exports}for(var i="function"==typeof require&&require,a=0;a<o.length;a++)n(o[a]);return n}({1:[function(e,r,t){$(document).ready(function(){$("#weather-location").click(function(){var e=$("#location").val();$("#location").val(""),$(".showWeather").text("The city you have chosen is "+e+"."),$.get("http://api.openweathermap.org/data/2.5/weather?q="+e+"&appid=YOUR-API-KEY-GOES-HERE",function(e){console.log(e)})})})},{}]},{},[1]);
