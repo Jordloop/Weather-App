@@ -116,7 +116,7 @@ Place this snippet at the end of the file.
 
 The 'build' task contains 'clean' task as a dependency. Therefor, this will not run until we add the 'clean' task
 
-# Environmental  Variables
+## Environmental  Variables
 
 <pre>> npm install gulp-util --save-dev</pre>
 
@@ -127,7 +127,7 @@ Create an environmental variable
 <pre>var buildProduction = utilities.env.production;</pre>
 
 
-# Clean Tasks
+## Clean Tasks
 
 ### Install del package
 
@@ -153,6 +153,7 @@ Using the following command will run a production build
 
 The following command will make a development build
 <pre>> gulp build</pre>
+
 
 
 
