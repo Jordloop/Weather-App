@@ -282,9 +282,84 @@ type="text/javascript" src="build/js/app.js"</pre>
 
 ### Combine these two bower tasks into one task in gulpfile.js
 
+When we call the 'bower' task it will execute the two dependencies
+
 <pre>gulp.task('bower', ['bowerJS', 'bowerCSS']);</pre>
 
+### Add 'bower' task to build task
 
+Update 'build' task so that it runs 'bower' task to that it runs in parallel to the other tasks
 
-<pre></pre>
+<pre>gulp.task('build', ['clean'], function(){
+  if (buildProduction) {
+    gulp.start('minifyScripts');
+  } else {
+    gulp.start('jsBrowserify');
+  }
+  gulp.start('bower');
+});</pre>
+
+# Using Development Servers with BrowserSync
+
+### Installing Package
+
+<pre>> npm install browser-sync --save-dev</pre>
+
+### Add require to gulpfile.js
+
+<pre>var browserSync = require('browser-sync').create();</pre>
+
+### Add task to start development server using 'serve' task
+
+<pre>gulp.task('serve', function() {
+  browserSync.init({
+    server: {
+      baseDir: "./",
+      index: "index.html"
+    }
+  });
+});</pre>
+
+### Reloading with BrowserSync and Gulp
+
+* When we call gulp.watch() we pass in 2 arguments. The first is an array of file names that we want gulp to keep an eye on. The second argument is an array of tasks to run whenever any of the aforementioned files change.
+
+<pre>  gulp.watch(['js/\*.js'], ['jsBuild']);
+});</pre>
+
+<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
+
+### Add 'jsBuild' task with dependency chain
+
+<pre>
+gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
+  browserSync.reload();
+});</pre>
+
+### Update 'serve' task
+
+<pre>gulp.task('serve', function() {
+  browserSync.init({
+    server: {
+      baseDir: "./",
+      index: "index.html"
+    }
+  });
+
+  gulp.watch(['js/\*.js'], ['jsBuild']);
+  gulp.watch(['bower.json'], ['bowerBuild']);
+
+});</pre>
+
+<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
+
+### Add 'browserBuild' task
+
+<pre>gulp.task('bowerBuild', ['bower'], function(){
+  browserSync.reload();
+});
+</pre>
+
+Note: As you structure your gulpfile, it's very important to be aware of task dependencies. By default, gulp runs all tasks simultaneously. So you must use dependency arrays to specify if a task must be completed before another one.
+
 <pre></pre>

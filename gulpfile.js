@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var del = require('del');
 var jshint = require('gulp-jshint');
+var browserSync = require('browser-sync').create();
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap" : {
@@ -59,20 +60,39 @@ gulp.task('jshint', function(){
 });
 
 //----BOWER-FILES----
-//This creates a document called "vendor.min.js" which contains each
-//a link to each JS front-end dependency ie. bootstrap.min.css
+//Concats front-end JS dependencies to "vendor.min.js"
 gulp.task('bowerJS', function () {
   return gulp.src(lib.ext('js').files)
     .pipe(concat('vendor.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./build/js'));
 });
-//This does as the above task but collects CSS dependencies
-//in a document called "vendor.css"
+//Concats front-end CSS dependencies to "vendor.css"
 gulp.task('bowerCSS', function () {
   return gulp.src(lib.ext('css').files)
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest('./build/css'));
 });
-//This executed bowerJS taska and bowerCSS task in parallel
+//Executed bowerJS taska and bowerCSS task in parallel
 gulp.task('bower', ['bowerJS', 'bowerCSS']);
+
+//Starts the development server
+gulp.task('serve', function() {
+  browserSync.init({
+    server: {
+      baseDir: "./",
+      index: "index.html"
+    }
+  });
+
+//Watches for changes in argument1, when changes take place execute argument2
+  gulp.watch(['js/*.js'], ['jsBuild']);
+  gulp.watch(['bower.json'], ['bowerBuild']);
+
+});
+gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
+  browserSync.reload();
+});
+gulp.task('bowerBuild', ['bower'], function(){
+  browserSync.reload();
+});
