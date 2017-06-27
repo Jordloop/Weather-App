@@ -1,3 +1,7 @@
+$(document).ready(function(){
+  $('#time').text(moment());
+});
+
 var apiKey = "YOUR-API-KEY-GOES-HERE";
 
 $(document).ready(function() {

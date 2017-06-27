@@ -185,14 +185,81 @@ The following command will start the linting process
 
 <pre>> gulp jshint</pre>
 
+--------------------------------------------------------------------------------
+# Bower Setup
+
+### Install/Init Package
+
+Install:
+<pre>> npm install bower -g
+//Mac users
+ sudo npm install bower -g</pre>
+
+Init:
+<pre>> bower init</pre>
+
+### Run bower build...
+When you make changes front end documents
+
+# Bower jQuery Setup
+
+<pre>> bower install jquery --save-dev</pre>
+
+## Change path in index.html's <sctipt> tags
+
+<pre>src="bower_components/jquery/dist/jquery.min.js"</pre>
+
+# Install bootstrap Package
+
+<pre>> bower install bootstrap --save</pre>
+
+### The following are all the links/script tags you should have in index.html at this point
+
+<pre>    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="build/js/app.js"></script>  </head>
+</pre>
+
+# Install Moment.js
+
+Moment.js can easily work with dates and times in various formats in our apps.
+<pre>> bower install moment --save</pre>
+
+### Place script link above app.js file
+
+<pre>src="bower_components/moment/min/moment.min.js"</pre>
+
+# Bower packages in gulpfile
+
+<pre>> npm install bower-files --save-dev</pre>
+
+### Require Package
+
+<pre>var lib = require('bower-files')();</pre>
+
+### Add bowerJS task
+
+<pre>gulp.task('bowerJS', function () {
+  return gulp.src(lib.ext('js').files)
+    .pipe(concat('vendor.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./build/js'));
+});</pre>
+
+This task pulls  together all JS files, and outputs one concatenated, minified file to link in our index.html
+
+### These should each be a property of a <script> element
+<pre>src="build/js/vendor.min.js"
+type="text/javascript" src="build/js/app.js"</pre>
+
+### Each time a new JS front-end dependence, the command will need to be used:
+
+<pre>gulp bowerJs</pre>
 
 
 
-
-
-
-
-
-<br>----------------------------------
-<pre>bower init</pre>
-<pre>npm install bower -g</pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>
