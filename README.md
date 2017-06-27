@@ -1,4 +1,4 @@
-## Set up Gulp:
+# Set up Gulp:
 <pre>npm init</pre>
 <pre>npm install gulp --save-dev</pre>
 <pre>npm install gulp -g
@@ -26,7 +26,7 @@ Run command to test myTask:
 return:
 <pre>> hello gulp</pre>
 
-## Browserify setup
+# Browserify setup
 
 <pre>npm install browserify --save-dev</pre>
 <pre>npm install vinyl-source-stream --save-dev</pre>
@@ -61,8 +61,12 @@ YouR .html files should now render in a browser.
 
 ## Concat Setup
 
-install concat:
+### install concat:
+
 <pre>> npm install gulp-concat --save-dev</pre>
+
+###
+
 
 
 <br>----------------------------------
