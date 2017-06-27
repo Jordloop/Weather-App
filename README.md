@@ -40,14 +40,14 @@ var source = require('vinyl-source-stream');
 
 ### Add jsBrowserify chain function to gulp.js:
 
-<pre>gulp.task('jsBrowserify', function() {
-  return browserify({ entries: ['./js/\*-interface.js'] })
+<pre>gulp.task('jsBrowserify', ['concatInterface'], function() {
+  return browserify({ entries: ['./tmp/allConcat.js'] })
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'));
 });</pre>
 
-<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
+Note: This task has 'concatInterface' as a dependency. We haven't added that task yet so this cannot run.
 
 
 ### Include new src to the <scripts> tag on index.html
@@ -57,15 +57,46 @@ This will link all of your front end .js files:
 
 #### Test browserify
 
-YouR .html files should now render in a browser.
+Your .html files should now render in a browser.
 
 ## Concat Setup
 
-### install concat:
+### Install gulp-concat:
 
 <pre>> npm install gulp-concat --save-dev</pre>
 
-###
+### Require gulp-concat and create gulp-concat task
+
+<pre>
+var concat = require('gulp-concat');
+
+//place before browserify task
+gulp.task('concatInterface', function() {
+  return gulp.src(['./js/\*-interface.js'])
+    .pipe(concat('allConcat.js'))
+    .pipe(gulp.dest('./tmp'));
+});</pre>
+
+<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
+
+### Because of dependencies when we run the jsBrowserify task, it will run the concatInterface task
+
+<pre>> gulp jsBrowserify</pre>
+
+# gulp-uglify (minification) Setup
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,7 +104,6 @@ YouR .html files should now render in a browser.
 <pre>bower init</pre>
 <pre>npm install bower -g</pre>
 <pre>npm install gulp --save-dev</pre>
-<pre>npm install gulp-concat --save-dev</pre>
 <pre>npm install gulp-uglify --save-dev</pre>
 <pre>npm install gulp-util --save-dev</pre>
 <pre>npm install del --save-dev</pre>
