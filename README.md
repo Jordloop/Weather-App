@@ -47,7 +47,7 @@ var source = require('vinyl-source-stream');
     .pipe(gulp.dest('./build/js'));
 });</pre>
 
-<strong>IMPORTANT NOTE: The path in the enteries array should not include a "\" before the asterisks. In .md an asterisks will comment out everything after, the "\" cancels that action.</strong>
+<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
 
 
 ### Include new src to the <scripts> tag on index.html
