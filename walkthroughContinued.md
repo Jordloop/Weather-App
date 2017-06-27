@@ -1,26 +1,32 @@
-## dev build and production builds must pass
-* If your build or --production build is not working fix it before moving on.
+# Bower Setup
 
-# Linting with JSHint
+### Install/Init Package
 
-### Install packages
-<pre>> npm install jshint --save-dev</pre>
-<pre>> npm install gulp-jshint --save-dev</pre>
+Install:
+<pre>> npm install bower -g
+//Mac users
+ sudo npm install bower -g</pre>
 
-## Require jshint in gulpfile.js
+Init:
+<pre>> bower init</pre>
 
-<pre>var jshint = require('gulp-jshint');</pre>
+# Bower jQuery Setup
 
-# Add jshint task
+<pre>> bower install jquery --save-dev</pre>
 
-Because this is not part of our chain of build tasks, put this at the bottom of the file.
+## Change path in index.html's <sctipt> tags
 
-<pre>gulp.task('jshint', function(){
-  return gulp.src(['js/\*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-});</pre>
+<pre>src="bower_components/jquery/dist/jquery.min.js"</pre>
 
-<strong>IMPORTANT NOTE: The path in the enteries array should not include a \ before the asterisks. In .md an asterisks will comment out everything after, the \ cancels that action.</strong>
+# Install bootstrap Package
 
-#### Test jshint
+<pre>> bower install bootstrap --save</pre>
+
+
+
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>

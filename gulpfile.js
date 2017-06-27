@@ -10,7 +10,7 @@ var jshint = require('gulp-jshint');
 // ----ENVIRONMENTAL VARIABLE----
 var buildProduction = utilities.env.production;
 
-//----BUILD CHAIN START-----
+//----BUILD CHAIN-----
 gulp.task('concatInterface', function() {
   return gulp.src(['./js/*-interface.js'])
     .pipe(concat('allConcat.js'))
@@ -38,7 +38,6 @@ gulp.task("build", ['clean'], function(){
     gulp.start('jsBrowserify');
   }
 });
-//----BUILD CHAIN END-----
 
 //----LINTER-----
 gulp.task('jshint', function(){
