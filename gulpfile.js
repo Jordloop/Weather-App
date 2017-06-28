@@ -85,14 +85,16 @@ gulp.task('serve', function() {
     }
   });
 
-//Watches for changes in argument1, when changes take place execute argument2
   gulp.watch(['js/*.js'], ['jsBuild']);
   gulp.watch(['bower.json'], ['bowerBuild']);
-
+  gulp.watch(['*.html'], ['htmlBuild']);
 });
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
   browserSync.reload();
 });
 gulp.task('bowerBuild', ['bower'], function(){
+  browserSync.reload();
+});
+gulp.task('htmlBuild', function() {
   browserSync.reload();
 });
